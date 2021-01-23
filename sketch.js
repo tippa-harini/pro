@@ -56,7 +56,7 @@ function draw() {
 }
 
 function keyPressed() {
- if (keyDown === "SPACE") {
+ if (keyCode === "DOWN_ARROW") {
    Matter.Body.setStatic(packageBody,false);
     
   }
