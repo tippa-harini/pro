@@ -1,66 +1,95 @@
-var helicopterIMG, helicopterSprite, packageSprite,packageIMG;
-var packageBody,ground
 const Engine = Matter.Engine;
-const World = Matter.World;
+const World= Matter.World;
 const Bodies = Matter.Bodies;
-const Body = Matter.Body;
+const Constraint = Matter.Constraint;
 
-function preload()
-{
-	helicopterIMG=loadImage("helicopter.png")
-	packageIMG=loadImage("package.png")
+var engine, world;
+
+function preload() {
+   
 }
 
-function setup() {
-	createCanvas(800, 700);
-	rectMode(CENTER);
-	
+function setup(){
+    var canvas = createCanvas(1300,600);
+    engine = Engine.create();
+    world = engine.world;
 
-	packageSprite=createSprite(width/2, 80, 10,10);
-	packageSprite.addImage(packageIMG)
-	packageSprite.scale=0.2
+    ground=new Ground(400,500,900,15);
 
-	helicopterSprite=createSprite(width/2, 200, 10,10);
-	helicopterSprite.addImage(helicopterIMG)
-	helicopterSprite.scale=0.6
+    hero=new Hero(120,300,25);
 
-	groundSprite=createSprite(width/2, height-35, width,10);
-	groundSprite.shapeColor=color(255)
+    fly=new Fly(hero.body,{x:120,y:150});
 
+    b1=new Block(300,450,50,50);
+    b2=new Block(300,400,50,50);
+    b3=new Block(300,350,50,50);
+    b4=new Block(300,300,50,50);
+    b5=new Block(300,250,50,50);
+    b6=new Block(300,200,50,50);
 
-	engine = Engine.create();
-	world = engine.world;
-
-	packageBody = Bodies.circle(width/2 , 200 , 5 , {restitution:0.5, isStatic:true});
-	World.add(world, packageBody);
-	
-
-	//Create a Ground
-	ground = Bodies.rectangle(width/2, 650, width, 10 , {isStatic:true} );
- 	World.add(world, ground);
+    b7=new Block(400,450,50,50);
+    b8=new Block(400,400,50,50);
+    b9=new Block(400,350,50,50);
+    b10=new Block(400,300,50,50);
 
 
-	Engine.run(engine);
-  
+    b11=new Block(500,450,50,50);
+    b12=new Block(500,400,50,50);
+    b13=new Block(500,350,50,50);
+    b14=new Block(500,300,50,50);
+    b15=new Block(500,250,50,50);
+    b16=new Block(500,200,50,50);
+    b17=new Block(500,150,50,50);
+
+    b18=new Block(600,450,50,50);
+    b19=new Block(600,400,50,50);
+    b20=new Block(600,350,50,50);
+    b21=new Block(600,300,50,50);
+    b22=new Block(600,250,50,50);
+
+    monster = new Monster(750,300,30)
 }
 
+function draw(){
+    background(0);
+     Engine.update(engine);
 
-function draw() {
-  rectMode(CENTER);
-  background(0);
-  packageSprite.x= packageBody.position.x 
-  packageSprite.y= packageBody.position.y 
-  drawSprites();
-  keyPressed();
- 
-}
+     ground.display();
 
-function keyPressed() {
- if (keyCode === "DOWN_ARROW") {
-   Matter.Body.setStatic(packageBody,false);
+     hero.display();
+
+     fly.display();
+
+     b1.display();
+     b2.display();
+     b3.display();
+     b4.display();
+     b5.display();
+     b6.display();
+     b7.display();
+     b8.display();
+     b9.display();
+     b10.display();
+     b11.display();
+     b12.display();
+     b13.display();
+     b14.display();
+     b15.display();
+     b16.display();
+     b17.display();
+     b18.display();
+     b19.display();
+     b20.display();
+     b21.display();
+     b22.display();
+
+     monster.display();
+
+
+} 
+
+function mouseDragged(){
     
-  }
+    Matter.Body.setPosition(hero.body,{x:mouseX,y:mouseY});
+
 }
-
-
-
